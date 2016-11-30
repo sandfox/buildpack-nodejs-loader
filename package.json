@@ -1,6 +1,6 @@
 {
   "name": "buildpack-nodejs-loader",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a shim for loading apps via buildpack provided nodejs binaries",
   "main": "outer.js",
   "scripts": {
