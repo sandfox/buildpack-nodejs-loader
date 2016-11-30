@@ -1,19 +1,19 @@
 {
-  "name": "shimmy-wimmy",
+  "name": "buildpack-nodejs-loader",
   "version": "0.0.1",
-  "description": "a shim for shimmying",
+  "description": "a shim for loading apps via buildpack provided nodejs binaries",
   "main": "outer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sandfox/shimmy-wimmy.git"
+    "url": "https://github.com/sandfox/buildpack-nodejs-loader.git"
   },
   "author": "sandfox",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sandfox/shimmy-wimmy/issues"
+    "url": "https://github.com/sandfox/buildpack-nodejs-loader/issues"
   },
-  "homepage": "https://github.com/sandfox/shimmy-wimmy#readme"
+  "homepage": "https://github.com/sandfox/buildpack-nodejs-loader#readme"
 }

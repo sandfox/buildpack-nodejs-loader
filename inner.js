@@ -1,7 +1,7 @@
 'use strict'
 
 /**
- * Inner shim for use in AWS
+ * Inner shim:
  * Expected to launched by outer shim.
  * Monitors it's parent so it isn't left orphaned
  */

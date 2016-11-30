@@ -1,9 +1,9 @@
 'use strict'
 
 /**
- * Outer shim for production / pm2
- * pm2 will load and run this file which in 
- * will run the app using the bundled nodejs
+ * Outer shim:
+ * system provided nodejs will run this file which in 
+ * turn will run the app using the bundled nodejs
  */
 
 const childProcess = require('child_process')
