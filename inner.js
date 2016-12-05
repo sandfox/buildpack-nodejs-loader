@@ -8,30 +8,32 @@
 
 let loaded = false;
 
+let lastPulse = Date.now()
+
 // expiry timer incase parent leaves us behind as an orphan
-let expiryTimer = setTimeout(byebye, 5000)
-expiryTimer.unref()
+let pulseCheckInterval = setInterval(check, 1000)
+pulseCheckInterval.unref()
 
 process.on('message', function(msg){
 
   if(msg.type && msg.type === 'heartbeat'){
-    return resetExpiry()
+    lastPulse = Date.now()
   }
 
   // Actually load the application up!
   if(msg.module && loaded === false){
     loaded = true
+    console.log(`[inner shim] loading ${msg.module}`)
     return require(msg.module)
   }
 
 })
 
-function resetExpiry(){
-  clearTimeout(expiryTimer)
-  expiryTimer = setTimeout(byebye, 3000)
-  expiryTimer.unref()
-}
 
-function byebye(code){
-  process.exit(code)
+function check(){
+  const now = Date.now()
+  if(now - lastPulse > 5000) {
+    console.log('[inner shim] no heartbeat recieved for 5 seconds - exiting')
+    process.exit(1)
+  }
 }
