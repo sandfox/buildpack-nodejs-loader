@@ -28,7 +28,6 @@ module.exports = function(targetFilePath){
   // run the inner shim via fork so we can establish an IPC
   const appProcess = childProcess.fork(path.join(__dirname, 'inner.js'), {
     execPath: nodeBinaryPath,
-    stdio: 'inherit',
     env: process.env
   })
 
