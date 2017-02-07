@@ -40,3 +40,13 @@ function check () {
  */
 console.log(`[inner shim] phoning home`)
 process.send('started')
+
+/**
+ * Tell parent about our view of the world
+ */
+process.send({
+  type: 'process-state',
+  state: {
+    version: process.version
+  }
+})

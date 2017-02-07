@@ -32,8 +32,12 @@ module.exports = function (targetFilePath) {
   const appProcess = childProcess.fork(innerShimPath, {
     execPath: nodeBinaryPath,
     env: process.env,
-    stdio: [process.stdin, process.stdout, process.stderr, 'ipc']
+    silent: true
   })
+
+  appProcess.stdout.pipe(process.stdout)
+  appProcess.stderr.pipe(process.stderr)
+  process.stdin.pipe(appProcess.stdin)
 
   console.log(`[outer shim] inner shim PID is ${appProcess.pid}`)
 
@@ -56,6 +60,10 @@ module.exports = function (targetFilePath) {
     if (typeof message === 'string' && message === 'started') {
       phonedHome = true
       console.log(`[outer shim] inner shim phoned home`)
+    }
+
+    if (typeof message === 'object' && message.type && message.type === 'process-state') {
+      console.log(`[outer shim] inner shim info: nodejs ${message.state.version}`)
     }
   })
 
