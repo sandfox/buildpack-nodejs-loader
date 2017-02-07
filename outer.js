@@ -10,7 +10,7 @@ const childProcess = require('child_process')
 const path = require('path')
 
 module.exports = function (targetFilePath) {
-  console.log(`[outer shim] outer shim is starting, using nodejs ${process.version} binary ${process.process.execPath}'`)
+  console.log(`[outer shim] outer shim running on nodejs ${process.version} binary ${process.execPath}'`)
   // run profile script to extract binary locations
   const o = childProcess.spawnSync(path.join(__dirname, 'find_node.sh'), {encoding: 'utf8'})
 
@@ -21,7 +21,7 @@ module.exports = function (targetFilePath) {
   // path to node binary should be here :-)
   const nodeBinaryPath = o.stdout.trim()
 
-  console.log(`[outer shim] found nodejs binary at ${nodeBinaryPath}`)
+  console.log(`[outer shim] found nodejs binary to use at ${nodeBinaryPath}`)
 
   const innerShimPath = path.join(__dirname, 'inner.js')
 
@@ -30,7 +30,7 @@ module.exports = function (targetFilePath) {
   const appProcess = childProcess.fork(innerShimPath, {
     execPath: nodeBinaryPath,
     env: process.env,
-    stdio: [process.stdin, process.stdout, process.stderr]
+    stdio: [process.stdin, process.stdout, process.stderr, 'ipc']
   })
 
   console.log(`[outer shim] inner shim PID is ${appProcess.pid}`)
