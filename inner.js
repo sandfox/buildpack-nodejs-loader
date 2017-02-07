@@ -34,3 +34,9 @@ function check () {
     process.exit(1)
   }
 }
+
+/**
+ * Phone home
+ */
+console.log(`[inner shim] phoning home`)
+process.send('started')
