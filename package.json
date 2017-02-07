@@ -1,10 +1,12 @@
 {
   "name": "buildpack-nodejs-loader",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "a shim for loading apps via buildpack provided nodejs binaries",
   "main": "outer.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint outer.js inner.js",
+    "lint-fix": "eslint --fix outer.js inner.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/sandfox/buildpack-nodejs-loader/issues"
   },
-  "homepage": "https://github.com/sandfox/buildpack-nodejs-loader#readme"
+  "homepage": "https://github.com/sandfox/buildpack-nodejs-loader#readme",
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^2.0.1"
+  }
 }

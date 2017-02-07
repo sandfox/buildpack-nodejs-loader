@@ -6,7 +6,7 @@
  * Monitors it's parent so it isn't left orphaned
  */
 
-let loaded = false;
+let loaded = false
 
 let lastPulse = Date.now()
 
@@ -14,25 +14,22 @@ let lastPulse = Date.now()
 let pulseCheckInterval = setInterval(check, 1000)
 pulseCheckInterval.unref()
 
-process.on('message', function(msg){
-
-  if(msg.type && msg.type === 'heartbeat'){
+process.on('message', function (msg) {
+  if (msg.type && msg.type === 'heartbeat') {
     lastPulse = Date.now()
   }
 
   // Actually load the application up!
-  if(msg.module && loaded === false){
+  if (msg.module && loaded === false) {
     loaded = true
     console.log(`[inner shim] loading ${msg.module}`)
     return require(msg.module)
   }
-
 })
 
-
-function check(){
+function check () {
   const now = Date.now()
-  if(now - lastPulse > 5000) {
+  if (now - lastPulse > 5000) {
     console.log('[inner shim] no heartbeat recieved for 5 seconds - exiting')
     process.exit(1)
   }
